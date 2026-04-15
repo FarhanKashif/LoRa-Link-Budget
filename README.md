@@ -22,7 +22,6 @@ It is designed to bridge the gap between:
   * Receiver Sensitivity
   * Link Margin
   * Path Loss
-  * Estimated Distance
 🔁 Dynamic update system for live RF monitoring
 🧠 Implements theoretical + practical RF models
 
