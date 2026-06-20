@@ -33,9 +33,3 @@ It is designed to bridge the gap between:
 ## 🤝 Contributions
 
 Feel free to fork and improve.
-
-
-## 👨‍💻 Author
-
-**Farhan Kashif**
-Embedded Systems & RF Enthusiast
