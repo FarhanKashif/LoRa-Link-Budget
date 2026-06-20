@@ -22,8 +22,6 @@ private:
     /* Change this value if you have different antenna with different gain */
     int antenna_gain = 3;    // dBi (omnidirectional antenna - 433MHz)
 
-    bool freq_flag = false;
-
     // SX127x Registers (LoRa mode)
     enum Register {
         REG_MSBFRQ_ADDR   = 0x06,
@@ -56,7 +54,8 @@ public:
     float Packet_RSSI();         // dBm
     float Sig_BW();              // kHz
     void  Spreading_Factor();    // sets SF
-
+    float Get_SNR_Margin() const { return snr_margin; }
+    
     // RF Metrics
     float Noise_Floor();             // dBm
     float Receiver_Sensitivity();    // dBm

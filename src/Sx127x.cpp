@@ -145,6 +145,7 @@ float Sx127x::Sig_BW() {
 
 // ================= NOISE FLOOR =================
 float Sx127x::Noise_Floor() {
+    Sig_BW();
     float bw_hz = bandwidth * 1000.0f;  // Hz
     // Noise Floor = -174dBm(thermal noise of room) + 10*log10(BW) + Noise Figure
     noise_floor = -174 + 10 * log10(bw_hz) + 6; 
@@ -155,13 +156,8 @@ float Sx127x::Noise_Floor() {
 float Sx127x::Receiver_Sensitivity() {
     float snr_limit;
 
-    bool flag = false;
-
-    if(!flag) {
-        Spreading_Factor();
-        Noise_Floor();
-        flag = true;
-    }
+    Spreading_Factor();
+    Noise_Floor();
 
     switch (SF) {
         case 7: snr_limit = -7.5; break;
@@ -174,15 +170,16 @@ float Sx127x::Receiver_Sensitivity() {
     }
 
     snr_margin = SNR - snr_limit;   // dB
-    Serial.print("SF: "); Serial.println(SF);
-    Serial.print("SNR Limit: "); Serial.print(snr_limit); Serial.println(" dB");
+    //Serial.print("SNR Margin: "); Serial.println(snr_margin);
+    //Serial.print("SF: "); Serial.println(SF);
+    //Serial.print("SNR Limit: "); Serial.print(snr_limit); Serial.println(" dB");
     // Sensitivity = -174 + 10*log10(BW) + Noise_Figure + SNR_limit 
     return (noise_floor + snr_limit);   // dBm
 }
 
 // ================= FADE MARGIN =================
 float Sx127x::Fade_Margin() {
-    /* A good Fade margin is > 10dB  -> Increase range to decrease fade margin */
+    /* A good Fade margin is > 10dB */
     update();
     // fade margin = RSSI - Sensitivity
     return Packet_RSSI() - Receiver_Sensitivity();  // dB
