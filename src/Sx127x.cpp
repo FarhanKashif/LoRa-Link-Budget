@@ -1,11 +1,5 @@
 /**** FOR LORA MODULATION TECHNIQUE ONLY ******/
 
-/* Noise Figure: The degradation in SNR when passed through LNA/Amplifiers in your rf module as they add their own a little bit of noise degrading the signal. LoRa has about 6dB of Noise Figure*/
-/* 26th March 2026 
-    1- Fade Margin Getter function
-    2- Noise Floor Implementation -> Unwanted Static Noise present at antenna even during no transmission
-*/
-
 #include <cmath>
 #include "Sx127x.h"
 
